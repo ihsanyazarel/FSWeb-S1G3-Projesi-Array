@@ -40,8 +40,9 @@ Aşağıdakileri yapmak için aşağıdaki kopyalama işlevini kullanın:
 */
 
 
-function kopyala(/*kod buraya*/){
-  /*kod buraya*/
+function kopyala(orjinalDizi){
+  let kopyaDizi = orjinalDizi;
+  return kopyaDizi;
 }
 
 
@@ -56,10 +57,15 @@ Bir dizinin tam olarak 25 çeşit olduğunu onaylayın. İşleviniz şunları ka
 */
 
 
-function dizi25Cesitmi(/*kod buraya*/){
-  /*kod buraya*/
+function dizi25Cesitmi(dizi){
+  let uzunluk = dizi.length;
+  if(uzunluk == 25){
+    return true;
+  } else {
+    return false;
+  }
 }
-
+//console.log(dizi25Cesitmi(orijinalTatlar));
 
 /* Görev 3:
 Pastane sahibi size yeni bir lezzet fikriyle geldi: Kakule! Bunun da çok tutacağından çok emin. Bu lezzeti eklemek için diziyi değiştirmeniz gerekir.
@@ -74,10 +80,10 @@ Aşağıdakileri yapmak için cesitEkle işlevini kullanın:
 */
 
 
-function cesitEkle(/*kod buraya*/){
-  /*kod buraya*/
+function cesitEkle(tatlar, yeniTad){
+  tatlar.unshift(yeniTad);
+  return tatlar;
 }
-
 
 /* Cörev 4:
 
@@ -92,10 +98,10 @@ Aşağıdakileri yapmak için sonCesitiKaldir işlevini kullanın:
 */
 
 
-function sonCesitiKaldir(/*kod buraya*/){
-  /*kod buraya*/
+function sonCesitiKaldir(dizi){
+  dizi.pop();
+  return dizi;
 }
-
 
 /* Görev 5:
 Dizideki belirli bir indeksteki çeşniyi döndüren bir işlev yazın.
@@ -108,10 +114,10 @@ Aşağıdakileri yapmak için aşağıdaki indekstekiCesitiGetir işlevini kulla
    Örneğin: indekstekiCesitiGetir(orijinalTatlar, 2) çalıştırılmasıyla, Kakule'in başarıyla eklendiği varsayarsak sonuç "Ceviz" olucaktır.
 */
 
-function indekstekiCesitiGetir(/*kod buraya*/){
-  /*kod buraya*/
+function indekstekiCesitiGetir(tatlar, index){
+  return tatlar[index];
 }
-
+//console.log(indekstekiCesitiGetir(orijinalTatlar,2));
 
 /* Görev 6:
 
@@ -128,10 +134,13 @@ Aşağıdakileri yapmak için ismeGoreCesitCikar işlevini kullanın:
   İPUCU: Bunun için .splice() kullanabilirsiniz.
 */
 
-function ismeGoreCesitCikar(/*kod buraya*/){
-  /*kod buraya*/
+function ismeGoreCesitCikar(tatlar, lezzetAdi){
+  let index = tatlar.indexOf(lezzetAdi);
+  tatlar.splice(index,1);
+  return tatlar;
 }
-
+//console.log(orijinalTatlar);
+//console.log(ismeGoreCesitCikar(orijinalTatlar,"Muz"));
 
 /* Görev 7:
 
@@ -154,8 +163,14 @@ Aşağıdakileri yapmak için ismeGoreFiltrele işlevini kullanın:
 */
 
 
-function ismeGoreFiltrele(/*kod buraya*/){
-  /*kod buraya*/
+function ismeGoreFiltrele(tatlar,filtreDegeri){
+  let filtrelenmisTatlar = new Array();
+  for(let i = 0 ; i<tatlar.length ; i++){
+    if(tatlar[i].includes(filtreDegeri)){
+      filtrelenmisTatlar.push(tatlar[i]);
+    }
+  }
+  return filtrelenmisTatlar;
 }
 
 
@@ -172,10 +187,20 @@ Aşağıdakileri yapmak için ortalamaKelimeSayisi işlevini kullanın:
    Örneğin: ortalamaKelimeSayisi(orijinalTatlar) 0 ile 2 arasında bir sayı döndürmelidir.
 */
 
-function ortalamaKelimeSayisi(/*kod buraya*/){
-  /*kod buraya*/
+function ortalamaKelimeSayisi(dizi){
+  let yeniDizi = new Array();
+  let gecici = new Array();
+  for(let i = 0; i<dizi.length;i++){
+    gecici = dizi[i].split(" ");
+    for(let j = 0; j<gecici.length; j++){
+      yeniDizi.push(gecici[j]);
+    }
+  }
+  
+  return yeniDizi.length/dizi.length;
 }
-
+//console.log(orijinalTatlar);
+//console.log(ortalamaKelimeSayisi(orijinalTatlar));
 
 /* ALIŞTIRMA 2:
 Firma mevcut tatların yanında artık mevsimlik lezzetler ve hatta bölgesel lezzetler de sunmaktadır. Toplam 25 lezzet aromasını
@@ -188,12 +213,60 @@ Aşağıdakileri yapmak için rastgeleTatlar işlevini ve yeni dizileri kullanı
 
   Örneğin: rastgeleTatlar(orijinalTatlar, yeniTatlar, mevsimlikTatlar, bolgeselTatlar) çalıştırıldığında ["Kestane", "Ballı Badem,"..."Hindistan Cevizi", "Kuru üzüm"].
 */
-
-
-function rastgeleTatlar(/*kod buraya*/){
-  /*kod buraya*/
+const yeniTatlar = [
+  "Badem",
+  "Ballı Badem",
+  "Fıstık Ezmesi",
+  "Profiterol",
+  "Madlen Çikolata"
+]
+const mevsimlikTatlar = [
+"Pekan",
+"Kaju",
+"Çikolatalı Mousse",
+"Fransız Vanilyası",
+"Yumurta",
+"Alman çikolatası",
+"Kek üzerine krema",
+"Hindistan Cevizi",
+"Kaymaklı Biskuvi",
+"Beyaz Çikolata",
+"Mango"
+]
+const bolgeselTatlar = [
+"Kaymak",
+"Karpuz",
+"Karadut",
+"Turunç",
+"Portakal",
+"Yogurt",
+"Krem Peynir",
+"Kakao",
+"Karamel macchiato",
+"Kuru üzüm",
+"Peynir",
+"Karamel"
+]
+function rastgeleTatlar(){
+  let tumTatlar = orijinalTatlar;
+  let ratgeleDizi = new Array();
+  for(let i = 0; i< yeniTatlar.length;i++){
+    tumTatlar.push(yeniTatlar[i]);
+  }
+  for(let i = 0; i< mevsimlikTatlar.length;i++){
+    tumTatlar.push(mevsimlikTatlar[i]);
+  }
+  for(let i = 0; i< bolgeselTatlar.length;i++){
+    tumTatlar.push(bolgeselTatlar[i]);
+  }
+  for(let i = 0;i<25;i++){
+    let geciciSayi = Math.floor(Math.random() * tumTatlar.length);
+    ratgeleDizi.push(tumTatlar[geciciSayi]);
+    tumTatlar.splice(geciciSayi,1);
+  }
+  return ratgeleDizi;
 }
-
+rastgeleTatlar();
 // NEW DATA ARRAYS FOR STRETCH 2 ⬇️
 // const yeniTatlar = [
 //   "Badem",
